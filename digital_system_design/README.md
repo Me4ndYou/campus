@@ -1,5 +1,6 @@
 # Perancangan Sistem Digital
 ## _Digital System Design_
+### Electrical Engineering, Sebelas Maret University
 
 This repo is to track my weekly assignment for this course, and feel free to clone and try every program that I make.
 Have fun ~
