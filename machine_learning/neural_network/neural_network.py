@@ -96,6 +96,7 @@ def cross_entropy_cost(A2, y, parameters):
 
 
 #Backpropagation
+# to differentiate parameters
 def backward_propagation(parameters, cache, X, y):
     m = X.shape[1] # training example
 
