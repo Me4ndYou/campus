@@ -1,13 +1,13 @@
 from __future__ import print_function
-import pandas as pd # data analysis
-import numpy as np # linear algebra
+import pandas as pd
+import numpy as np
 
 #import libraries for data visualization
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import classification_report
 from sklearn import metrics
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import RepeatedKFold, cross_val_score, KFold
 
 data = pd.read_csv("machine_learning\Smart Farming\Crop_recommendation.csv")
 print(data.shape)
@@ -17,7 +17,7 @@ print(data.info())
 print(data.describe())
 print(data.isnull().sum())
 
-# Displaying correlation bbetween each features
+# Displaying correlation between each features
 fig, ax = plt.subplots(1, 1, figsize=(15, 9))
 sns.heatmap(data.corr(), annot=True,cmap='viridis')
 ax.set(xlabel='features')
@@ -36,6 +36,7 @@ for i in data_cond.columns:
     plt.hist(data_cond[i])
     plt.title(i)
     plt.show()
+    
 # Displaying table between crops and features
 pd.pivot_table(data,index='label',values=['temperature','rainfall','N','P','K','humidity','ph'])
 
@@ -47,10 +48,10 @@ model = []
 
 # Splitting dataset into training and testing data
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(features,target,test_size = 0.2,random_state =2)
+x_train, x_test, y_train, y_test = train_test_split(features,target,test_size = 0.2,random_state = 2)
 
-from sklearn.ensemble import RandomForestClassifier
 # RANDOM FOREST
+from sklearn.ensemble import RandomForestClassifier
 RF = RandomForestClassifier(n_estimators=20, random_state=0)
 RF.fit(x_train,y_train)
 
@@ -90,3 +91,13 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.title('Predicted vs actual')
 plt.show()
+
+from sklearn.datasets import make_classification
+from numpy import mean
+from numpy import std
+cv = KFold(n_splits=10, random_state=1, shuffle=True)
+
+# Cross validation score
+score = cross_val_score(RF, features, target, cv=cv, scoring="accuracy")
+print('Cross validation score: ',score)
+print('Accuracy: %.3f (%.3f)' % (mean(score), std(score)))
