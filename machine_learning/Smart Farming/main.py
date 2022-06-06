@@ -99,5 +99,5 @@ cv = KFold(n_splits=10, random_state=1, shuffle=True)
 
 # Cross validation score
 score = cross_val_score(RF, features, target, cv=cv, scoring="accuracy")
-print('Cross validation score: ',score)
+print('\n\nCross validation score using KFold: ',score)
 print('Accuracy: %.3f (%.3f)' % (mean(score), std(score)))
