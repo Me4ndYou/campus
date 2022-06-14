@@ -1,0 +1,11 @@
+di laporan pahami hubungan dengan decision tree
+random forest -> pny beberapa
+assemble learning -> random forest
+
+Mendalami pembahasan mengenai random forest dan confusion matrix
+
+prediksi itu klasifikasi
+confusion matrix -> actual value, predicted value
+
+dalami confusion matrix
+menampilkan akurasi dan spesifikasi;
